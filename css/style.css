@@ -1,0 +1,652 @@
+/* Nuevos consejos
+
+    max-width: 100% (en img) ->
+        esto hace que las imagenes se adapten al ancho del elemento padre, es bueno declaralo como un selector global. esto NO FORZA a que el elemento tome el 100% del elemento padre, solo lo limita a no pasarse
+    
+    width: 100% (en img) ->
+        esto SI FORZA a que el elemento tome el 100% del contenedor padre.
+
+    display: block; "en img" -> 
+        esto me permitio eliminar la separacion que habia con el texto en las categorias (usarlo cuando las img generan espacio con texto) 
+
+    
+    vertical-align -> (opcion para quitar espacion entre img y texto, vertacalmente)
+        es una propiedad de CSS que se utiliza para controlar la alineación vertical de un elemento en relación con el texto adyacente(proximo). esta propiedad se utiliza con más frecuencia en imágenes, también se puede aplicar a otros elementos, como texto, enlaces y elementos de formulario.
+        acepta varios valores, que determinan cómo se alinea verticalmente un elemento en relación con el texto adyacente (proximo). Algunos de los valores más comunes son:
+
+            "baseline": alinea el elemento en la línea base del texto adyacente.
+            "top": alinea el elemento en la parte superior de la línea de texto.
+            "middle": alinea el elemento en el centro de la línea de texto.
+            "bottom": alinea el elemento en la parte inferior de la línea de texto.
+
+    
+    background-image: linear-gradient(to right, transparent 50%, #037bc0 50%, #037bc0 100%), url(../img/nosotros.jpg); ->
+        Me permitio dividir la seccion de nosotros. 
+
+
+    transform: scale(); ->
+        aumenta o disminuye su tamaño tanto en el eje horizontal como en el vertical.
+        El valor '()' define el factor de escala que se aplicará al elemento, donde un valor de 1 representa el tamaño original del elemento.
+        algunos ejemplos para ilustrar cómo funciona la función scale():
+
+            -transform: scale(1.5);: aumenta el tamaño del elemento en un 50%.
+            -transform: scale(0.8);: reduce el tamaño del elemento en un 20%.
+            -transform: scale(2, 1.5);: aumenta el tamaño del elemento en un 100% en el eje horizontal y en un 50% en el eje vertical.
+            -transform: scale(-1);: voltea el elemento horizontalmente, invirtiendo su dirección.
+
+        transition ->
+        definir la transición suave de un estado de estilo a otro en un elemento. 
+        
+            transition: propiedad [duración] [función de temporización] [retraso];
+
+            propiedad: Especifica la propiedad CSS que se transicionará. Puede ser una única propiedad, como background-color, o varias propiedades separadas por comas, como background-color, color.
+
+            duración: Opcionalmente, se puede especificar la duración de la transición. El valor predeterminado es 0s, es decir, sin duración y sin efecto de transición. La duración se puede expresar en segundos (s) o milisegundos (ms).
+
+            función de temporización: Opcionalmente, se puede especificar una función de temporización para controlar cómo se anima la transición. Hay varias funciones predefinidas disponibles, como ease, linear, ease-in, ease-out, ease-in-out, entre otras. También puedes crear tus propias funciones de temporización utilizando la propiedad cubic-bezier().
+
+            retraso: Opcionalmente, se puede especificar un retraso antes de que comience la transición. El valor predeterminado es 0s. El retraso se puede expresar en segundos (s) o milisegundos (ms).
+
+        overflow: hidden -> es recomendable poner esta propiedad dentro de el contenedor que contenga una img que tenga en su hover tranform: scale(); esto es para que la img no se salga del contenedor
+        
+    "object-fit" ->
+        es una propiedad que se utiliza para especificar cómo una imagen, video u otro elemento debe ajustarse a su contenedor. Esta propiedad se utiliza para controlar la forma en que se muestra el contenido de un elemento, como una imagen o un video, en su contenedor, ya sea para que se ajuste completamente, para que se muestre en su tamaño original o para que se ajuste de manera proporcional al contenedor sin distorsionar la imagen o el video.
+
+        "object-fit" acepta varios valores:
+
+            "fill": hace que el elemento ocupe completamente el espacio del contenedor, sin importar si se distorsiona o no.
+
+            "contain": hace que el elemento se ajuste dentro del contenedor, manteniendo su relación de aspecto original y sin recortar los bordes.
+
+            "cover": hace que el elemento se ajuste dentro del contenedor, manteniendo su relación de aspecto original, pero cortando los bordes que no caben en el contenedor.
+
+            "none": muestra el elemento a su tamaño original, sin ajustar el tamaño o la relación de aspecto.
+
+            "scale-down": hace que el elemento se ajuste dentro del contenedor, pero si el tamaño del elemento es mayor que el del contenedor, se ajusta al tamaño más pequeño.
+
+    width: max-content; 
+        propiedad nueva, el enlace ocupa lo del texto, muy bueno para los que esten dentro de un flex
+
+    
+    
+    grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+
+        -'repeat' es una función de CSS que nos permite repetir un conjunto de valores varias veces.
+
+        -'auto-fit' es un valor que se utiliza con la función repeat, y hace que el grid ajuste automáticamente el número de columnas según el ancho del contenedor, sin crear columnas vacías.
+
+        -'minmax' es otra función de CSS que nos permite especificar un rango de tamaños para una columna.
+
+        -'25rem' es el tamaño mínimo de las columnas, es decir, la columna nunca será más pequeña que 25 rem.
+
+        -'1fr' es el tamaño máximo de las columnas, es decir, la columna se expandirá tanto como sea posible dentro del contenedor, sin exceder el tamaño máximo especificado.
+
+
+
+    
+*/
+html{
+    box-sizing: border-box;
+    font-size: 62.5%; /*1rem = 10px*/
+}
+*, *:after, *:before{
+    box-sizing: inherit;
+}
+body{
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    line-height: 2;
+}
+
+/* Globales 
+----------------------------------------------------------*/
+h1,h2,h3{
+    font-family: 'Playfair Display', serif;
+    margin: 0 0 2rem 0;
+}
+h1{
+    font-size: 4rem;
+}
+@media (min-width: 768px) {
+    h1{
+      font-size: 5rem;
+    }   
+}
+h2{
+    font-size: 3.2rem;
+}
+@media (min-width: 768px) {
+    h2{
+        font-size: 4rem;
+    }
+}
+h3{
+    font-size: 2.4rem;
+}
+@media (min-width: 768px) {
+    h3{
+        font-size: 3rem;
+    }
+}
+a{
+    text-decoration: none;
+    color: #000;
+}
+img{
+    max-width: 100%;/* esto hace que las imagenes se adapten al ancho del elemento padre*/
+
+    display: block;
+    /* esto me permitio eliminar la separacion que habia con el texto en las categorias (usarlo cuando las img generan espacio con texto) */
+
+    /* vertical-align: middle; */
+}
+@media (min-width: 768px) {  
+    label{
+        text-align: right;
+    }
+}
+.contenedor{
+    max-width: 120rem;
+    /* max-width: min(120rem, 95%); */
+    margin: 0 auto;
+}
+.boton{
+    background-color: #8cbc00;
+    display: block;
+    color: #ffffff;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 1rem;
+    transition: background-color .3s ease-out;
+}
+.boton:hover{
+    background-color: rgb(114, 171, 30);
+}
+/* utilidades 
+----------------------------------------------------------*/
+.text-center{
+    text-align: center;
+}
+.margin_2rem{
+    margin: 0 2rem;
+}
+@media (min-width: 992px) {
+    .margin_2rem{
+        margin: 0;
+    }
+}
+
+/* Header 
+----------------------------------------------------------*/
+.nombre-sitio{
+    margin-top: 5rem;
+    text-align: center;
+    line-height: 1.2;
+}
+.nombre-sitio h1{
+    margin-bottom: 2rem;
+    display: inline-block;
+}
+.nombre-sitio span{
+    color: #037bc0;
+}
+
+/* Nav 
+----------------------------------------------------------*/
+.contenedor-nav{
+    border-top: 1px solid #e1e1e1;
+    /* border-bottom: 1px solid #e1e1e1; */
+
+}
+.nav-principal{
+    padding: 2rem 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.enlace--activo{
+    color: #037bc0;
+    font-weight: 700;
+}
+@media (min-width: 768px) {
+    .nav-principal{
+        flex-direction: row;
+        justify-content: space-around;
+    }
+}
+
+/* hero
+----------------------------------------------------------*/
+.hero{
+    background-image: url(../img/principal.jpg);
+    height: 25rem;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+}
+/* HERO */
+@media (min-width: 768px) {
+    .hero{
+        height: 55rem;
+    }
+    
+}
+
+/* categorias 
+----------------------------------------------------------*/
+.listado-categorias{
+    text-align: center;
+}
+.categorias{
+    padding-top: 5rem;
+    margin-bottom: 5rem;
+}
+.categoria a{
+    display: block;
+    text-align: center;
+    padding: 2rem 0;
+    transition: background-color .19s ease ;
+}
+@media (min-width: 768px) {
+    .categoria a{
+        font-size: 2rem;
+    }
+}
+.categoria a:hover{
+    background-color: #037bc0;
+    color: #ffffff;
+    border-bottom-right-radius: 1rem;
+}
+.categoria{
+    display: inline-block;
+    text-align: center;
+    /* max-width: 90%; */
+    margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+    .categoria{
+        margin-bottom: 0;
+    }
+}
+.categoria img{
+    margin: 0 auto;
+}
+
+@media (min-width: 768px) {  
+    .listado-categorias{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 2rem;
+    }
+}
+
+/* Sobre nosotros 
+----------------------------------------------------------*/
+.sobre-nosotros{
+    /* to right: de derecha a izq */
+    /* background-image: linear-gradient(to bottom, transparent 50%, #037bc0 50%, #037bc0 100%), url(../img/nosotros.jpg); */
+
+    background-image: url(../img/nosotros.jpg);
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: 90rem;
+}
+.sobre-nosotros-grid{
+    display: grid;
+    grid-template-rows: repeat(2, 1fr);
+}
+.nosotros-texto{
+    background-color: #037bc0;
+    color: #ffffff;
+    grid-row: 2/3;
+    padding: 0 5rem ;
+}
+.nosotros-texto h2{
+    margin: 0;
+}
+@media (min-width: 768px) {
+    .sobre-nosotros{
+        /* to right: de derecha a izq */
+        background-image: linear-gradient(to right, transparent 50%, #037bc0 50%, #037bc0 100%), url(../img/nosotros.jpg);
+        background-position: left center;
+        padding: 10rem 0;
+        background-size: 100%, 120rem;
+        /* primer valor gradient, segundo la img */
+    }
+    .sobre-nosotros-grid{
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: none;
+        column-gap: 8rem;
+        max-width: min(120rem, 90%);
+        margin: 0 auto;
+    }
+    .nosotros-texto{
+        color: #ffffff;
+        grid-column: 2/3;
+        padding: unset;
+    }
+}
+
+/*main - listado de productos 
+----------------------------------------------------------*/
+.contenido-principal{
+    padding-top: 5rem;
+}
+@media (min-width: 768px) { 
+    .listado-productos{
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 2rem;
+    }
+    .producto:nth-child(1) img{
+        height: 43rem;
+        width: 100%;
+        object-fit: cover;
+    }
+    .producto:nth-child(1){
+        grid-column: 1/7;
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+    }
+    .producto:nth-child(2){
+        grid-column: 1/4;
+    }
+    .producto:nth-child(3){
+        grid-column: 4/7;
+    }
+    .producto:nth-child(2) img, 
+    .producto:nth-child(3) img{
+    height: 40rem;
+    width: 100%;
+    object-fit: cover;
+    }
+    .producto:nth-child(4){
+        grid-column: 1/3;
+    }
+    .producto:nth-child(5){
+        grid-column: 3/5;
+    }
+    .producto:nth-child(6){
+        grid-column: 5/7;
+    }
+}
+.producto{
+    background-color: #037bc0;
+    overflow: hidden;
+    margin-bottom: 4rem;
+}
+@media (min-width: 768px) {
+    .producto{
+        margin-bottom: 0;
+    }
+}
+.producto:last-child{
+    margin-bottom: 0;
+}
+.producto:nth-child(1) .texto-producto{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.producto img{
+    height: auto;
+    transition: transform .5s ease;
+ }
+ .producto img:hover{
+    transform: scale(1.02);
+}
+.texto-producto{ 
+    padding: 2rem;   
+    text-align: center;
+    color: #ffffff;
+}
+.texto-producto h3{
+    margin: 0;
+}
+.texto-producto p {
+    margin: 0 0 .5rem 0;
+}
+.texto-producto .precio{
+    font-size: 2.8rem;
+    font-weight: 900;
+}
+
+/* Nosotros.html 
+----------------------------------------------------------*/
+.nosotros{
+    margin-top: 4rem;
+}
+@media (min-width: 768px) {  
+    .grid-nosotros{
+        grid-template-columns: repeat(auto-fit, minmax(44.7rem, 1fr));
+         display: grid;
+        /* grid-template-columns: repeat(2, 1fr); */
+        column-gap: 4rem; 
+    }
+}
+
+/* Blog.html 
+----------------------------------------------------------*/
+.blog h2{
+    margin-bottom: 4rem;
+}
+@media (min-width: 768px) {
+    
+    .blog-flex{
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        column-gap: 4rem;
+        padding: 0 2rem;
+    }
+}
+.blog-contenido article:first-child{
+    border-bottom: 1px solid #e1e1e1;
+    padding-bottom: 4rem;
+    margin-bottom: 2rem;
+}
+.article-blog h3{
+    /* margin-top: 2rem; */
+    margin-bottom: 2rem;
+}
+.entrada-meta{
+    display: flex;
+    flex-direction: column;
+    /* justify-content: space-around; */
+}
+.entrada-meta p{
+    margin: 0;
+    margin-top: 2rem;
+}
+.entrada-meta p:last-of-type{
+    margin-top: .5rem;
+}
+@media (min-width: 992px) {
+    .entrada-meta{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    .entrada-meta p:last-of-type{
+        margin-top: 2rem;
+    }
+}
+.entrada-meta p{
+    font-weight: 700;
+    color: #037bc0;
+}
+.entrada-meta span{
+    color: #000;
+}
+.blog-contenido article:last-child{
+    margin-bottom: 4rem;
+}
+@media (min-width: 768px) {
+    .blog-contenido article:last-child{
+        margin-bottom: 0;
+    }
+}
+.boton-blog{
+    /* margin-left: 2rem; */
+    text-align: center;
+    width: 100%;
+}
+@media (min-width: 768px) {
+    .boton-blog{
+        max-width: 30rem;
+    }
+}
+/* entrada blog 
+----------------------------------------------------------*/
+.contenido-entrada-blog{
+    max-width: 60rem;
+    margin: 0 auto;
+}
+
+/* Galería 
+----------------------------------------------------------*/
+.grid-galeria{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+}
+.img-galeria img{
+    object-fit: cover;
+    height: 30rem;
+}
+.img-galeria:nth-child(9){
+    display: none;
+}
+@media (min-width: 768px) {
+    .img-galeria img{
+        height: 35rem;
+    }
+    .grid-galeria{
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+    }
+    .img-galeria:nth-child(9){
+        display: unset;
+    }
+}
+
+/* contacto.html 
+----------------------------------------------------------*/
+.formulario{
+    max-width: 60rem;
+    margin: 0 auto;
+}
+.fieldset{
+    border: 1px solid #a49999;
+    margin-bottom: 2rem;
+}
+.legend{
+    background-color: #2f7aa5;
+    width: 100%;
+    color: #ffffff;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 900;
+    padding: 1rem 0;
+    margin: 0 auto;
+    margin-bottom: 4rem;
+    /* font-size: 2rem; */
+}
+.campo-formulario{
+    display: flex;
+    margin-bottom: 2rem;
+    margin-top: 0;
+    column-gap: 2rem;
+}
+.campo-formulario label{
+    flex-basis: 12rem;
+}
+.campo-formulario input, .campo-formulario textarea {
+    flex-basis: 100%;
+    border: 1px solid #e1e1e1;
+    padding: 1rem;
+}
+.campo-formulario select{
+    flex-basis: 100%;
+    border: 1px solid #e1e1e1;
+    padding: 1rem;
+}
+.campo-formulario textarea{
+    height: 23rem;
+}
+.radio{
+    display: flex;
+    margin-bottom: 2rem;
+    column-gap: 2rem;
+}
+.radio label{
+    flex-basis: 10rem;
+}
+.boton-form{
+    border: none;
+}
+.boton-form:hover{
+    cursor: pointer;
+}
+@media (max-width: 480px) {
+    .formulario{
+        width: 90%;
+        height: 100%;
+    }
+    .campo-formulario{
+        flex-direction: column;
+    }
+    .campo-formulario label{
+        flex-basis: unset;
+    }
+    .campo-formulario textarea{
+        height: unset;
+        padding-bottom: 15rem;
+    }
+    .seleccion-pais{
+        text-align: center;
+    }
+    .campo-categoria input{
+        text-align: center;
+    }
+    .boton-form{
+        width: 100%;
+    }
+}
+
+/* Footer 
+----------------------------------------------------------*/
+.footer{
+    border-top: 1px solid #e1e1e1;
+    margin-top: 4rem;
+    text-align: center;
+}
+@media (min-width: 768px) {
+    .footer-grid{
+        padding: 5rem 0 2rem 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        column-gap: 2rem;
+    }
+    .footer{
+        text-align: unset;
+    }
+}
+.footer-grid > div{ /* Primer nivel de hijos div */
+    margin-bottom: 2rem;
+}
+@media (min-width: 768px) {
+    .footer-grid > div{
+        margin-bottom: 0;
+    }
+}
+.footer-grid h3{
+    margin-bottom: .5rem;
+}
+.footer-nav{
+    display: flex;
+    flex-direction: column;
+}
+.copyright{
+    margin-top: 3rem;
+}
